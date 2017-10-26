@@ -7,6 +7,7 @@ import { AngularFireAuthModule } from "angularfire2/auth";
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { VideosComponent } from './videos/videos.component';
+import { RouterModule, Route } from "@angular/router";
 
 var firebaseConfig = {
   "apiKey": "AIzaSyBcWifa9JKUuSrEMTJQm35QUGKZrZf7KCw",
@@ -16,6 +17,13 @@ var firebaseConfig = {
   "messagingSenderId": "610637531922",
   "projectId": "tolgalist"
 };
+
+var route: Route[] = [
+  { path: "home", component: HomeComponent },
+  { path: "videos", component: VideosComponent },
+  { path: "", redirectTo: "home", pathMatch: "full" },
+  { path: "**", component: HomeComponent }
+];
 
 @NgModule({
   declarations: [
@@ -27,7 +35,8 @@ var firebaseConfig = {
     BrowserModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    RouterModule.forRoot(route)
   ],
   providers: [],
   bootstrap: [AppComponent]
